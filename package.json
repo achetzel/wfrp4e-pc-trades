@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build": "yarn run js && yarn run less && cp -r module.json lang ./dist",
+    "js": "esbuild src/maker.ts --bundle --outdir=dist",
+    "less": "lessc css/main.less dist/css/main.css",
+    "deploy-local": "yarn run build && yarn run localcopy",
+    "localcopy": "cp -r ./dist/* $LOCAL_MOD_INSTALL",
+    "package": "rm -rf dist && yarn run build && cd dist && zip -mr wfrp4e-actor-maker.zip ./*"
+  },
+  "devDependencies": {
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
+    "esbuild": "^0.15.7",
+    "less": "^4.1.3"
+  }
+}
+
