@@ -34,6 +34,6 @@
     "src/main.js"
   ],
   "url": "https://github.com/achetzel/wfrp4e-pc-trades",
-  "download": "https://github.com/achetzel/wfrp4e-pc-trades/blob/latest/dist/wfrp4e-actor-maker.zip?raw=true",
-  "manifest": "https://raw.githubusercontent.com/achetzel/wfrp4e-pc-trades/latest/module.zip"
+  "download": "https://github.com/achetzel/wfrp4e-pc-trades/blob/latest/dist/wfrp4e-pc-trades.zip?raw=true",
+  "manifest": "https://raw.githubusercontent.com/achetzel/wfrp4e-pc-trades/latest/module.json"
 }
