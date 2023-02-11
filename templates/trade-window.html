@@ -1,0 +1,46 @@
+<form autocomplete="off" onsubmit="preventDefault();">
+    <div class="form-group stacked">
+        <label>{{ localize "PCTRADES.ItemToTrade"}}</label>
+        <div class="flexrow">
+            <img
+                    class="profile item-profile"
+                    src="{{item.img}}"
+                    title="{{item.name}}"
+            />
+            <h3 class="item-name">{{ item.name }}</h3>
+        </div>
+    </div>
+
+    {{#if showquantity}}
+    <div class="form-group">
+        <label>{{ localize "PCTRADES.Quantity"}}</label>
+        <input class="quantity-input" type="text" data-dtype="number" value="{{quantity}}" />
+    </div>
+    <div class="flexrow">
+        <button class="quantity-quick-btn" data-qsize="one">{{ localize "PCTRADES.One"}}</button>
+        <button class="quantity-quick-btn" data-qsize="half">{{ localize "PCTRADES.Half"}}</button>
+        <button class="quantity-quick-btn" data-qsize="all">{{ localize "PCTRADES.All"}}</button>
+    </div>
+    {{/if}}
+
+    <div class="form-group stacked">
+        <label>{{ localize "PCTRADES.SelectCharacter"}}</label>
+        <ul class="directory-list">
+            {{#each characters}}
+            <li class="actor directory-item flexrow" data-actor-id="{{this.id}}">
+                <img
+                        class="profile actor-profile"
+                        src="{{this.img}}"
+                        title="{{this.name}}"
+                />
+                <h3 class="entity-name"><a>{{this.name}}</a></h3>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-secondary cancel">{{ localize "PCTRADES.ButtonCancel"}}</button>
+        <button class="btn btn-primary submit" disabled>{{ localize "PCTRADES.ButtonSend"}}</button>
+    </div>
+</form>

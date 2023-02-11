@@ -1,0 +1,14 @@
+{
+  "PCTRADES.send": "Trade Item",
+  "PCTRADES.tradeWindowTitle": "Trade Item",
+  "PCTRADES.currency": "Coins",
+  "PCTRADES.itemToTrade": "",
+  "PCTRADES.quantity": "Quantity",
+  "PCTRADES.one": "1",
+  "PCTRADES.half": "1/2",
+  "PCTRADES.all": "All",
+  "PCTRADES.buttonCancel": "Cancel",
+  "PCTRADES.buttonSend": "Send",
+  "PCTRADES.error.init": "Could not initiate trade",
+  "PCTRADES.error.noOtherPCs": "No other PCs online"
+}

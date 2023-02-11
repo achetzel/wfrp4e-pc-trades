@@ -1,0 +1,39 @@
+{
+  "title": "WFRP4e PC Trades",
+  "description": "A Foundry VTT module which allows you to send and receive items from other players.",
+  "version": "1.0.0",
+  "id": "wfrp4e-pc-trades",
+  "authors": "achetzel",
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10.291"
+  },
+  "relationships": {
+    "systems": [{
+      "id": "wfrp4e",
+      "type": "system",
+      "compatibility": {
+        "minimum": "6.3.1",
+        "verified": "6.3.1"
+      }
+    }]
+  },
+  "license": "LICENSE",
+  "socket": true,
+  "styles": [
+    "css/main.css"
+  ],
+  "esmodules": [
+    "main.js"
+  ],
+  "url": "https://github.com/achetzel/wfrp4e-pc-trades",
+  "download": "https://github.com/achetzel/wfrp4e-pc-trades/blob/latest/dist/wfrp4e-pc-trades.zip?raw=true",
+  "manifest": "https://raw.githubusercontent.com/achetzel/wfrp4e-pc-trades/latest/module.json"
+}
