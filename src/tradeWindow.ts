@@ -23,7 +23,7 @@ export default class TradeWindow extends Application {
         this._selectedActor = null;
         if (this.data.item) {
             // @ts-ignore - ItemWfrp4e not available, and Item does not have system
-            this.quantity = this.data.item.system.quantity;
+            this.quantity = this.data.item.system.quantity.value;
         }
     }
 
@@ -102,7 +102,7 @@ export default class TradeWindow extends Application {
             qsize = (event.currentTarget as HTMLDataElement).dataset.qsize as string;
         }
         // @ts-ignore
-        let qmax = this.data.item.system.quantity;
+        let qmax = this.data.item.system.quantity.value;
         let q = 1;
         switch (qsize) {
             case "one":
@@ -125,7 +125,7 @@ export default class TradeWindow extends Application {
      */
     updateQuantity(newQuantity: number): void {
         // @ts-ignore
-        newQuantity = Math.min(Math.max(newQuantity, 1), this.data.item.system.quantity);
+        newQuantity = Math.min(Math.max(newQuantity, 1), this.data.item.system.quantity.value);
         this.quantity = newQuantity;
         (this.element.find(".quantity-input")[0] as HTMLInputElement).value = this.quantity.toString();
     }

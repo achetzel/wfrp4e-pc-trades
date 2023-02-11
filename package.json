@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "yarn run js && yarn run less && cp -r module.json lang ./dist",
+    "build": "yarn run js && yarn run less && cp -r module.json lang templates ./dist",
     "js": "esbuild src/main.ts --bundle --outdir=dist",
     "less": "lessc css/main.less dist/css/main.css",
     "deploy-local": "yarn run build && yarn run localcopy",

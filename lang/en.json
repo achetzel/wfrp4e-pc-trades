@@ -9,6 +9,7 @@
   "PCTRADES.all": "All",
   "PCTRADES.buttonCancel": "Cancel",
   "PCTRADES.buttonSend": "Send",
-  "PCTRADES.error.init": "Could not initiate trade",
-  "PCTRADES.error.noOtherPCs": "No other PCs online"
+  "PCTRADES.error.noOtherPCs": "No other PCs online",
+  "PCTRADES.error.tradeNoLongerValid": "Current trade is no longer valid",
+  "PCTRADES.error.init": "Error when initializing trade for item"
 }

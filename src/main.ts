@@ -1,6 +1,6 @@
 import {CFG} from "./config"
-import {itemDefault} from "./items"
-import {ItemData} from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
+import TradeItem from "./items"
+import Trade from "./trade";
 
 Hooks.once("setup", async function () {
     Hooks.on("renderActorSheetWfrp4eCharacter", renderInjectionHook);
@@ -9,17 +9,17 @@ Hooks.once("setup", async function () {
         let data = packet.data;
         let type = packet.type;
         let handler = packet.handler;
-        // if (handler === game.userId) {
-        //     if (type === "request") {
-        //         receiveTrade(data);
-        //     }
-        //     if (type === "accepted") {
-        //         completeTrade(data);
-        //     }
-        //     if (type === "denied") {
-        //         denyTrade(data);
-        //     }
-        // }
+         if (handler === game.userId) {
+             if (type === "request") {
+                 new Trade(data).receive();
+             }
+             if (type === "accepted") {
+                 new Trade(data).complete();
+             }
+             if (type === "denied") {
+                 new Trade(data).deny();
+             }
+         }
     });
 
     console.log("WFRP4E PC Trades Loaded");
@@ -32,7 +32,7 @@ async function renderInjectionHook(sheet: any, element: Element) {
 
     for (let item of items) {
         try {
-            await itemDefault(item, actorId);
+            await new TradeItem().itemDefault(item, actorId);
         } catch (e) {
             console.error("WFRP4e PC Trades | Failed to inject onto item: ", item);
         }

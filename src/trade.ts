@@ -51,7 +51,7 @@ export default class Trade {
                 tw.render(true);
             }
         } catch {
-            console.error("Was unable to complete trade for item: ", itemId);
+            ui.notifications.error(game.i18n.localize("PCTRADES.error.init"));
         }
 
     }
@@ -71,23 +71,23 @@ export default class Trade {
                 });
             }
         } else {
-            ui.notifications.error(game.i18n.localize("PCTRADES.TradeNoLongerValid"));
+            ui.notifications.error(game.i18n.localize("PCTRADES.error.tradeNoLongerValid"));
         }
     }
 
-    private complete() {
+    complete() {
         this.removeFromSource();
         let actorName: string = new Player().getActorName(this.tradeData?.destActorId as string);
         ui.notifications.notify(game.i18n.format("PCTRADES.TradeAccepted", { name: actorName }));
     }
 
-    private deny() {
+    deny() {
         this.request();
         let actorName: string = new Player().getActorName(this.tradeData?.destActorId as string);
         ui.notifications.notify(game.i18n.format("PCTRADES.TradeRejected", { name: actorName }));
     }
 
-    private receive() {
+    receive() {
         // Only handle if we're the target user.
         if (this.tradeData?.destUserId === game.userId) {
             let actorName: string = new Player().getActorName(this.tradeData?.srcActorId as string);
@@ -171,7 +171,7 @@ export default class Trade {
             if (this.tradeItem) {
                 // Item should exist and have a valid quantity
                 // @ts-ignore - ItemWfrp4e has system, but not available
-                if (this.tradeItem.system.quantity < this.tradeData.quantity) {
+                if (this.tradeItem.system.quantity.value < this.tradeData.quantity) {
                     console.error("Quantity mismatch");
                     return false;
                 }
@@ -187,13 +187,13 @@ export default class Trade {
         if (this.tradeItem) {
 
             // @ts-ignore - ItemWfrp4e has system, but not available
-            if (this.tradeItem.system.quantity <= this.tradeData.quantity) {
+            if (this.tradeItem.system.quantity.value <= this.tradeData.quantity) {
                 this.srcActor!.deleteEmbeddedDocuments("Item", [this.tradeItem.id as string]);
             }
             else {
                 this.tradeItem.update({data: {
                     // @ts-ignore - ItemWfrp4e has system, but not available
-                    quantity: this.tradeItem.system.quantity - this.tradeData.quantity
+                    quantity: this.tradeItem.system.quantity.value - this.tradeData.quantity
                 }});
             }
         } else {
@@ -205,7 +205,7 @@ export default class Trade {
         if (this.tradeItem) {
             let itemData = duplicate(this.tradeItem);
             // @ts-ignore - ItemWfrp4e has system, but not available
-            itemData.system.quantity = this.tradeData.quantity;
+            itemData.system.quantity.value = this.tradeData.quantity;
             this.destActor!.createEmbeddedDocuments("Item", [itemData]);
         } else {
             console.error("Could not find item being traded to destination");
