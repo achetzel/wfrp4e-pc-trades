@@ -1,15 +1,14 @@
 {
-  "PCTRADES.send": "Trade Item",
-  "PCTRADES.tradeWindowTitle": "Trade Item",
-  "PCTRADES.currency": "Coins",
-  "PCTRADES.itemToTrade": "",
-  "PCTRADES.quantity": "Quantity",
-  "PCTRADES.one": "1",
-  "PCTRADES.half": "1/2",
-  "PCTRADES.all": "All",
-  "PCTRADES.buttonCancel": "Cancel",
-  "PCTRADES.buttonSend": "Send",
-  "PCTRADES.error.noOtherPCs": "No other PCs online",
-  "PCTRADES.error.tradeNoLongerValid": "Current trade is no longer valid",
-  "PCTRADES.error.init": "Error when initializing trade for item"
+  "PCTRADES.window.title": "Item Trade",
+  "PCTRADES.trade.tradeSent": "Trade request sent to target player",
+  "PCTRADES.trade.accepted": "Trade has completed",
+  "PCTRADES.trade.rejected": "Trade was rejected",
+  "PCTRADES.trade.incomingTradeTitle": "Item Trade",
+  "PCTRADES.trade.incomingTradeDescription": "A player want to trade an item to you",
+  "PCTRADES.trade.confirm": "Confirm",
+  "PCTRADES.trade.deny": "Deny",
+  "PCTRADES.error.trade.noLongerValid": "Current trade is no longer valid",
+  "PCTRADES.items.send": "Trade",
+  "PCTRADES.error.init": "Error when initializing trade for item",
+  "PCTRADES.error.noOtherPCs": "No other PCs online"
 }

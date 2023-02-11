@@ -12,7 +12,7 @@ export default class TradeItem {
 
     itemDefault(item: HTMLElement, actorId: string) {
         const edit: JQuery<HTMLElement> = $(".item-control.item-edit", item);
-        const icon: HTMLElement = $(`<a class="item-control item-trade" title="${game.i18n.localize("PCTRADES.send")}">
+        const icon: HTMLElement = $(`<a class="item-control item-trade" title="${game.i18n.localize("PCTRADES.items.send")}">
         <i class="fas fa-balance-scale-right"></i></a>`)[0];
 
         icon.dataset.itemId = item.dataset.itemId;

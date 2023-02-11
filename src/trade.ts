@@ -58,7 +58,7 @@ export default class Trade {
 
     async request() {
         if (this.isValid()) {
-            ui.notifications.notify(game.i18n.localize("PCTRADES.tradeSent"));
+            ui.notifications.notify(game.i18n.localize("PCTRADES.trade.tradeSent"));
 
             if (this.tradeData?.srcUserId === this.tradeData?.destUserId) {
                 // Local pathway
@@ -78,13 +78,13 @@ export default class Trade {
     complete() {
         this.removeFromSource();
         let actorName: string = new Player().getActorName(this.tradeData?.destActorId as string);
-        ui.notifications.notify(game.i18n.format("PCTRADES.TradeAccepted", { name: actorName }));
+        ui.notifications.notify(game.i18n.format("PCTRADES.trade.accepted", { name: actorName }));
     }
 
     deny() {
         this.request();
         let actorName: string = new Player().getActorName(this.tradeData?.destActorId as string);
-        ui.notifications.notify(game.i18n.format("PCTRADES.TradeRejected", { name: actorName }));
+        ui.notifications.notify(game.i18n.format("PCTRADES.trade.rejected", { name: actorName }));
     }
 
     receive() {
@@ -92,20 +92,20 @@ export default class Trade {
         if (this.tradeData?.destUserId === game.userId) {
             let actorName: string = new Player().getActorName(this.tradeData?.srcActorId as string);
             let d = new Dialog({
-                title: game.i18n.localize("PCTRADES.TradeIncomingTitle"),
-                content: "<p>" + game.i18n.format("PCTRADES.TradeDescription", {
+                title: game.i18n.localize("PCTRADES.trade.incomingTradeTitle"),
+                content: "<p>" + game.i18n.format("PCTRADES.trade.incomingTradeDescription", {
                     name: actorName,
                     item: this.tradeData.itemId
                 }) + "</p>",
                 buttons: {
                     one: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: game.i18n.localize("PCTRADES.TradeConfirm"),
+                        label: game.i18n.localize("PCTRADES.trade.confirm"),
                         callback: () => this.confirmed()
                     },
                     two: {
                         icon: '<i class="fas fa-times"></i>',
-                        label: game.i18n.localize("PCTRADES.TradeDeny"),
+                        label: game.i18n.localize("PCTRADES.trade.deny"),
                         callback: () => this.deny()
                     }
                 },
@@ -136,7 +136,7 @@ export default class Trade {
             }
         }
         else {
-            ui.notifications.error(game.i18n.localize("PCTRADES.TradeNoLongerValid"));
+            ui.notifications.error(game.i18n.localize("PCTRADES.trade.noLongerValid"));
         }
     }
 
