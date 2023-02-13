@@ -1,6 +1,6 @@
 <form autocomplete="off" onsubmit="preventDefault();">
     <div class="form-group stacked">
-        <label>{{ localize "PCTRADES.ItemToTrade"}}</label>
+        <label>{{ localize "PCTRADES.template.itemToTrade"}}</label>
         <div class="flexrow">
             <img
                     class="profile item-profile"
@@ -13,18 +13,18 @@
 
     {{#if showquantity}}
     <div class="form-group">
-        <label>{{ localize "PCTRADES.Quantity"}}</label>
+        <label>{{ localize "PCTRADES.template.quantity"}}</label>
         <input class="quantity-input" type="text" data-dtype="number" value="{{quantity}}" />
     </div>
     <div class="flexrow">
-        <button class="quantity-quick-btn" data-qsize="one">{{ localize "PCTRADES.One"}}</button>
-        <button class="quantity-quick-btn" data-qsize="half">{{ localize "PCTRADES.Half"}}</button>
-        <button class="quantity-quick-btn" data-qsize="all">{{ localize "PCTRADES.All"}}</button>
+        <button class="quantity-quick-btn" data-qsize="one">{{ localize "PCTRADES.template.one"}}</button>
+        <button class="quantity-quick-btn" data-qsize="half">{{ localize "PCTRADES.template.half"}}</button>
+        <button class="quantity-quick-btn" data-qsize="all">{{ localize "PCTRADES.template.all"}}</button>
     </div>
     {{/if}}
 
     <div class="form-group stacked">
-        <label>{{ localize "PCTRADES.SelectCharacter"}}</label>
+        <label>{{ localize "PCTRADES.template.selectCharacter"}}</label>
         <ul class="directory-list">
             {{#each characters}}
             <li class="actor directory-item flexrow" data-actor-id="{{this.id}}">
@@ -40,7 +40,7 @@
     </div>
 
     <div class="form-group">
-        <button class="btn btn-secondary cancel">{{ localize "PCTRADES.ButtonCancel"}}</button>
-        <button class="btn btn-primary submit" disabled>{{ localize "PCTRADES.ButtonSend"}}</button>
+        <button class="btn btn-secondary cancel">{{ localize "PCTRADES.template.cancel"}}</button>
+        <button class="btn btn-primary submit" disabled>{{ localize "PCTRADES.template.send"}}</button>
     </div>
 </form>

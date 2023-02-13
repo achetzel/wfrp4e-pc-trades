@@ -1,5 +1,13 @@
 {
   "PCTRADES.window.title": "Item Trade",
+  "PCTRADES.template.itemToTrade": "Item being traded",
+  "PCTRADES.template.quantity": "Quantity",
+  "PCTRADES.template.one": "1",
+  "PCTRADES.template.half": "1/2",
+  "PCTRADES.template.all": "All",
+  "PCTRADES.template.selectCharacter": "Select Character",
+  "PCTRADES.template.cancel": "Cancel",
+  "PCTRADES.template.send": "Submit",
   "PCTRADES.trade.tradeSent": "Trade request sent to target player",
   "PCTRADES.trade.accepted": "Trade has completed",
   "PCTRADES.trade.rejected": "Trade was rejected",

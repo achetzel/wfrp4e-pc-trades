@@ -50,7 +50,7 @@ export default class TradeWindow extends Application {
 
     /** @override */
     get title() {
-        return game.i18n.localize("PCTRADES.tradeWindowTitle");
+        return game.i18n.localize("PCTRADES.window.tradeWindowTitle");
     }
 
     /** @override */
