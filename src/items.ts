@@ -11,6 +11,7 @@ export default class TradeItem {
     }
 
     itemDefault(item: HTMLElement, actorId: string) {
+        console.log("itemDefault() Start");
         const edit: JQuery<HTMLElement> = $(".item-control.item-edit", item);
         const icon: HTMLElement = $(`<a class="item-control item-trade" title="${game.i18n.localize("PCTRADES.items.send")}">
         <i class="fas fa-balance-scale-right"></i></a>`)[0];
@@ -24,9 +25,11 @@ export default class TradeItem {
         if (edit[0]) {
             edit[0].after(icon);
         }
+        console.log("itemDefault() End");
     }
 
-    onItemTradeClick(event: Event) {
+    async onItemTradeClick(event: Event) {
+        console.log("onItemTradeClick() Start");
         event.preventDefault();
         if (event.currentTarget instanceof Element) {
             const ele: HTMLElement = event.currentTarget.closest(".item-trade") as HTMLElement;
@@ -34,5 +37,6 @@ export default class TradeItem {
             const itemId: string = ele.dataset.itemId as string;
             new Trade(actorId, itemId);
         }
+        console.log("onItemTradeClick() End");
     }
 }

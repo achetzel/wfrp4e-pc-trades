@@ -8,6 +8,7 @@
   "PCTRADES.template.selectCharacter": "Select Character",
   "PCTRADES.template.cancel": "Cancel",
   "PCTRADES.template.send": "Submit",
+  "PCTRADES.player.gmTradeDescription": "",
   "PCTRADES.trade.tradeSent": "Trade request sent to target player",
   "PCTRADES.trade.accepted": "Trade has completed",
   "PCTRADES.trade.rejected": "Trade was rejected",

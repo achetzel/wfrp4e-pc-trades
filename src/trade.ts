@@ -49,6 +49,7 @@ export default class Trade {
                     characters
                 });
                 tw.render(true);
+                console.log("init trade finished")
             }
         } catch {
             ui.notifications.error(game.i18n.localize("PCTRADES.error.init"));
@@ -57,7 +58,7 @@ export default class Trade {
     }
 
     async request() {
-        if (this.isValid()) {
+        if (await this.isValid()) {
             ui.notifications.notify(game.i18n.localize("PCTRADES.trade.tradeSent"));
 
             if (this.tradeData?.srcUserId === this.tradeData?.destUserId) {
@@ -148,7 +149,7 @@ export default class Trade {
         });
     }
 
-    private isValid() {
+    private async isValid() {
         // Ensure both source and destination users are logged in.
         if (this.tradeData) {
 

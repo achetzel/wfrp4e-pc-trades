@@ -46,7 +46,7 @@ export default class Player {
         let chatMessage = {
             user: game.userId,
             speaker: ChatMessage.getSpeaker(),
-            content: game.i18n.format("LetsTrade5E.TradeDescriptionGM", {sender: srcActor.name, receiver: destActor.name, item: tradeItem.name}),
+            content: game.i18n.format("PCTRADES.player.gmTradeDescription", {sender: srcActor.name, receiver: destActor.name, item: tradeItem.name}),
             whisper: game.users?.filter(u => u.isGM).map(u => u.id)
         };
 
