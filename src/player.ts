@@ -26,6 +26,7 @@ export default class Player {
     }
 
     getActorName(actor: StoredDocument<Actor> | string): string {
+
         if (typeof actor === "string") {
             let a: StoredDocument<Actor> = game.actors!.get(actor) as StoredDocument<Actor>;
             return a.name as string;
@@ -35,11 +36,7 @@ export default class Player {
     }
 
     getActor(actorId: string): StoredDocument<Actor> | undefined {
-        if (game.actors) {
-            return game.actors.get(actorId);
-        } else {
-            return;
-        }
+        return game.actors!.get(actorId);
     }
 
     async sendChatMessage(srcActor: StoredDocument<Actor>, destActor: StoredDocument<Actor>, tradeItem: Item) {
@@ -55,7 +52,6 @@ export default class Player {
         };
 
         chatMessage.whisper?.push(srcActor.id);
-
         await ChatMessage.create(chatMessage);
     }
 }

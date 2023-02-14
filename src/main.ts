@@ -36,7 +36,7 @@ async function renderInjectionHook(sheet: any, element: Element) {
         } catch (e) {
             console.error("WFRP4e PC Trades | Failed to inject onto item: ", item);
         }
-        console.log("WFRP4e PC Trades | Added trade icons to sheet for actor " + actorId);
     }
+    console.log("WFRP4e PC Trades | Added trade icons to sheet for actor " + actorId);
 }
 

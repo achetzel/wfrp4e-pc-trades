@@ -49,7 +49,6 @@ export default class Trade {
                     characters
                 });
                 tw.render(true);
-                console.log("init trade finished")
             }
         } catch {
             ui.notifications.error(game.i18n.localize("PCTRADES.error.init"));
@@ -78,6 +77,8 @@ export default class Trade {
 
     async complete() {
         await this.removeFromSource();
+        console.log("completed");
+        console.log(this.tradeData);
         let actorName: string = new Player().getActorName(this.tradeData?.destActorId as string);
         ui.notifications.notify(game.i18n.format("PCTRADES.trade.accepted", {name: actorName}));
     }
@@ -143,13 +144,11 @@ export default class Trade {
     }
 
     async tradeDenied() {
-        console.log("tradeDenied() Start");
         game.socket!.emit(CFG.socket, {
             data: this.tradeData,
             handler: this.tradeData!.srcUserId,
             type: "denied"
         });
-        console.log("tradeDenied() End");
     }
 
     private async isValid() {
@@ -195,7 +194,7 @@ export default class Trade {
                 this.srcActor!.deleteEmbeddedDocuments("Item", [this.tradeItem.id as string]);
             }
             else {
-                this.tradeItem.update({data: {
+                await this.tradeItem.update({data: {
                     // @ts-ignore - ItemWfrp4e has system, but not available
                     quantity: this.tradeItem.system.quantity.value - this.tradeData.quantity
                 }});

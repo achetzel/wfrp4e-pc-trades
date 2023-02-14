@@ -1,3 +1,7 @@
+@border-color: #ff6400;
+@text-shadow: #F00;
+@text-color: #d6d6d6;
+
 .pc-trades-window img.profile.item-profile {
   flex: 0 0 42px;
   height: 42px;
@@ -30,7 +34,7 @@
 
 .pc-trades-window li.active {
   font-weight: bold;
-  border-color: #ff6400;
+  border-color: @border-color;
   background: rgba(0, 0, 0, 0.1)
 }
 
@@ -58,7 +62,7 @@
 }
 
 .pc-trades-window .item-list li:hover {
-  text-shadow: 0 0 3px #F00;
+  text-shadow: 0 0 3px @text-shadow;
 }
 
 .pc-trades-window .item-list li div {

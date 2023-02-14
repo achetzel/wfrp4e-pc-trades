@@ -71,7 +71,6 @@ export default class TradeWindow extends Application {
 
     /** @override */
     activateListeners(html: JQuery) {
-        console.log("activateListeners() Start");
         super.activateListeners(html);
         html.find("li.actor.directory-item").on("click", this._selectActor.bind(this));
         // @ts-ignore
@@ -79,7 +78,6 @@ export default class TradeWindow extends Application {
         html.find("button.submit").on("click", this._submit.bind(this));
         html.find(".quantity-input").on("change", this._changeQuantity.bind(this));
         html.find(".quantity-quick-btn").on("click", this._quickChangeQuantity.bind(this));
-        console.log("activateListeners() End");
     }
 
     /**
@@ -142,7 +140,6 @@ export default class TradeWindow extends Application {
             closest: (arg0: string) => HTMLElement;
         };
     }): Promise<void> {
-        console.log("_selectActor() Start");
         event.preventDefault();
         let actorElement: HTMLElement = event.currentTarget.closest(".actor.directory-item");
         this._selectedActor = this.data.characters.find(c => c.id === actorElement.dataset.actorId) as ICharData;
@@ -150,14 +147,11 @@ export default class TradeWindow extends Application {
         actorElement.classList.add("active");
 
         if (this.selectedActor) {
-            console.log(this.selectedActor);
             this.element.find("button.submit").removeAttr("disabled");
         }
-        console.log("_selectActor() End");
     }
 
     async _submit(event: Event) {
-        console.log("_submit() Start");
         event.preventDefault();
         if (this.selectedActor) {
             let tradeData: ITradeData = {
@@ -173,6 +167,5 @@ export default class TradeWindow extends Application {
             await new Trade(tradeData).request();
             await this.close();
         }
-        console.log("_submit() End");
     }
 }
