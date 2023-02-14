@@ -42,16 +42,20 @@ export default class Player {
         }
     }
 
-    sendChatMessage(srcActor: StoredDocument<Actor>, destActor: StoredDocument<Actor>, tradeItem: Item) {
+    async sendChatMessage(srcActor: StoredDocument<Actor>, destActor: StoredDocument<Actor>, tradeItem: Item) {
         let chatMessage = {
             user: game.userId,
             speaker: ChatMessage.getSpeaker(),
-            content: game.i18n.format("PCTRADES.player.gmTradeDescription", {sender: srcActor.name, receiver: destActor.name, item: tradeItem.name}),
+            content: game.i18n.format("PCTRADES.player.gmTradeDescription", {
+                sender: srcActor.name,
+                receiver: destActor.name,
+                item: tradeItem.name
+            }),
             whisper: game.users?.filter(u => u.isGM).map(u => u.id)
         };
 
         chatMessage.whisper?.push(srcActor.id);
 
-        ChatMessage.create(chatMessage);
+        await ChatMessage.create(chatMessage);
     }
 }

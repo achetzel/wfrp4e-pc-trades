@@ -156,8 +156,9 @@ export default class TradeWindow extends Application {
         console.log("_selectActor() End");
     }
 
-    async _submit() {
+    async _submit(event: Event) {
         console.log("_submit() Start");
+        event.preventDefault();
         if (this.selectedActor) {
             let tradeData: ITradeData = {
                 srcUserId: game.userId as string,

@@ -5,21 +5,21 @@ import Trade from "./trade";
 Hooks.once("setup", async function () {
     Hooks.on("renderActorSheetWfrp4eCharacter", renderInjectionHook);
 
-    game.socket!.on(CFG.socket, packet => {
+    game.socket!.on(CFG.socket, async packet => {
         let data = packet.data;
         let type = packet.type;
         let handler = packet.handler;
-         if (handler === game.userId) {
-             if (type === "request") {
-                 new Trade(data).receive();
-             }
-             if (type === "accepted") {
-                 new Trade(data).complete();
-             }
-             if (type === "denied") {
-                 new Trade(data).deny();
-             }
-         }
+        if (handler === game.userId) {
+            if (type === "request") {
+                await new Trade(data).receive();
+            }
+            if (type === "accepted") {
+                await new Trade(data).complete();
+            }
+            if (type === "denied") {
+                await new Trade(data).deny();
+            }
+        }
     });
 
     console.log("WFRP4E PC Trades Loaded");

@@ -63,7 +63,7 @@ export default class Trade {
 
             if (this.tradeData?.srcUserId === this.tradeData?.destUserId) {
                 // Local pathway
-                this.receive();
+                await this.receive();
             } else {
                 game.socket!.emit(CFG.socket, {
                     data: this.tradeData,
@@ -76,38 +76,39 @@ export default class Trade {
         }
     }
 
-    complete() {
-        this.removeFromSource();
+    async complete() {
+        await this.removeFromSource();
         let actorName: string = new Player().getActorName(this.tradeData?.destActorId as string);
-        ui.notifications.notify(game.i18n.format("PCTRADES.trade.accepted", { name: actorName }));
+        ui.notifications.notify(game.i18n.format("PCTRADES.trade.accepted", {name: actorName}));
     }
 
-    deny() {
-        this.request();
+    async deny() {
+        //await this.request();
         let actorName: string = new Player().getActorName(this.tradeData?.destActorId as string);
         ui.notifications.notify(game.i18n.format("PCTRADES.trade.rejected", { name: actorName }));
     }
 
-    receive() {
+    async receive(): Promise<void> {
         // Only handle if we're the target user.
         if (this.tradeData?.destUserId === game.userId) {
             let actorName: string = new Player().getActorName(this.tradeData?.srcActorId as string);
+            let itemName: string = new TradeItem().getItemName(this.tradeData?.srcActorId as string, this.tradeData.itemId as string);
             let d = new Dialog({
                 title: game.i18n.localize("PCTRADES.trade.incomingTradeTitle"),
                 content: "<p>" + game.i18n.format("PCTRADES.trade.incomingTradeDescription", {
                     name: actorName,
-                    item: this.tradeData.itemId
+                    item: itemName
                 }) + "</p>",
                 buttons: {
                     one: {
                         icon: '<i class="fas fa-check"></i>',
                         label: game.i18n.localize("PCTRADES.trade.confirm"),
-                        callback: () => this.confirmed()
+                        callback: async () => await this.confirmed()
                     },
                     two: {
                         icon: '<i class="fas fa-times"></i>',
                         label: game.i18n.localize("PCTRADES.trade.deny"),
-                        callback: () => this.deny()
+                        callback: async () => await this.tradeDenied()
                     }
                 },
                 default: "two",
@@ -116,18 +117,18 @@ export default class Trade {
         }
     }
 
-    private confirmed() {
-        if (this.isValid()) {
-            this.applyToDestination();
+    private async confirmed() {
+        if (await this.isValid()) {
+            await this.applyToDestination();
             // if isValid is true there is absolutely tradeData
-            new Player().sendChatMessage(
+            await new Player().sendChatMessage(
                 this.srcActor as StoredDocument<Actor>,
                 this.destActor as StoredDocument<Actor>,
                 this.tradeItem as Item
             );
 
             if (this.tradeData!.srcUserId === this.tradeData!.destUserId) {
-                this.complete();
+                await this.complete();
             } else {
                 game.socket!.emit(CFG.socket, {
                     data: this.tradeData,
@@ -141,12 +142,14 @@ export default class Trade {
         }
     }
 
-    private tradeDenied() {
+    async tradeDenied() {
+        console.log("tradeDenied() Start");
         game.socket!.emit(CFG.socket, {
             data: this.tradeData,
             handler: this.tradeData!.srcUserId,
             type: "denied"
         });
+        console.log("tradeDenied() End");
     }
 
     private async isValid() {
@@ -184,7 +187,7 @@ export default class Trade {
         }
     }
 
-    private removeFromSource() {
+    private async removeFromSource(): Promise<void> {
         if (this.tradeItem) {
 
             // @ts-ignore - ItemWfrp4e has system, but not available
@@ -202,7 +205,7 @@ export default class Trade {
         }
     }
 
-    private applyToDestination() {
+    private async applyToDestination(): Promise<void> {
         if (this.tradeItem) {
             let itemData = duplicate(this.tradeItem);
             // @ts-ignore - ItemWfrp4e has system, but not available
