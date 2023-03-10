@@ -7,7 +7,6 @@ export default class TradeItem {
     }
 
     getItemName(actorId: string, itemId: string) {
-        console.log(itemId);
         // @ts-ignore - already established we are trading at this point so item does exist
         return game.actors.get(actorId).items!.get(itemId)!.name as string;
     }

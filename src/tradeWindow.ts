@@ -162,6 +162,7 @@ export default class TradeWindow extends Application {
             }
             if (this.data.item) {
                 tradeData.itemId = this.data.item.id as string;
+                tradeData.type = this.data.item.type as string;
                 tradeData.quantity = this.quantity;
             }
             await new Trade(tradeData).request();

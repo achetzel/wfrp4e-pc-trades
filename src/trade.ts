@@ -2,6 +2,10 @@ import {CFG} from "./config";
 import Player, {ICharData} from "./player";
 import TradeWindow from "./tradeWindow"
 import TradeItem from "./items";
+import {Collection} from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/utils/module.mjs";
+import EmbeddedCollection
+    from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/embedded-collection.mjs";
+import {ActorData, ItemData} from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
 export interface ITradeData {
     srcUserId: string,
@@ -9,6 +13,7 @@ export interface ITradeData {
     destUserId: string,
     destActorId: string,
     itemId?: string,
+    type?: string,
     quantity?: number
 }
 
@@ -38,6 +43,7 @@ export default class Trade {
     async init(actorId: string, itemId: string) {
         try {
             const item: Item = game.actors!.get(actorId)!.items.get(itemId) as Item;
+            const type: string = item.type;
             const characters: Array<ICharData> = await new Player().getOnlinePlayers(actorId);
 
             if (characters.length === 0) {
@@ -60,9 +66,9 @@ export default class Trade {
         if (await this.isValid()) {
             ui.notifications.notify(game.i18n.localize("PCTRADES.trade.tradeSent"));
 
-            if (this.tradeData?.srcUserId === this.tradeData?.destUserId) {
-                // Local pathway
+            if (this.tradeData!.srcUserId === this.tradeData!.destUserId) {
                 await this.receive();
+
             } else {
                 game.socket!.emit(CFG.socket, {
                     data: this.tradeData,
@@ -70,6 +76,7 @@ export default class Trade {
                     type: "request"
                 });
             }
+
         } else {
             ui.notifications.error(game.i18n.localize("PCTRADES.error.tradeNoLongerValid"));
         }
@@ -77,8 +84,6 @@ export default class Trade {
 
     async complete() {
         await this.removeFromSource();
-        console.log("completed");
-        console.log(this.tradeData);
         let actorName: string = new Player().getActorName(this.tradeData?.destActorId as string);
         ui.notifications.notify(game.i18n.format("PCTRADES.trade.accepted", {name: actorName}));
     }
@@ -98,7 +103,8 @@ export default class Trade {
                 title: game.i18n.localize("PCTRADES.trade.incomingTradeTitle"),
                 content: "<p>" + game.i18n.format("PCTRADES.trade.incomingTradeDescription", {
                     name: actorName,
-                    item: itemName
+                    item: itemName,
+                    quantity: this.tradeData.quantity
                 }) + "</p>",
                 buttons: {
                     one: {
@@ -125,7 +131,8 @@ export default class Trade {
             await new Player().sendChatMessage(
                 this.srcActor as StoredDocument<Actor>,
                 this.destActor as StoredDocument<Actor>,
-                this.tradeItem as Item
+                this.tradeItem as Item,
+                this.tradeData?.quantity as number
             );
 
             if (this.tradeData!.srcUserId === this.tradeData!.destUserId) {
@@ -187,32 +194,53 @@ export default class Trade {
     }
 
     private async removeFromSource(): Promise<void> {
+        let itemValue: number = 0;
         if (this.tradeItem) {
-
             // @ts-ignore - ItemWfrp4e has system, but not available
-            if (this.tradeItem.system.quantity.value <= this.tradeData.quantity) {
+            if (this.tradeItem.system.quantity.value <= this.tradeData.quantity && this.tradeData.type !== "money") {
                 this.srcActor!.deleteEmbeddedDocuments("Item", [this.tradeItem.id as string]);
+            // @ts-ignore - ItemWfrp4e has system, but not available
+            } else if (this.tradeItem.system.quantity.value <= this.tradeData.quantity && this.tradeData.type === "money") {
+                itemValue = 0;
+            } else {
+                // @ts-ignore - ItemWfrp4e has system, but not available
+                itemValue = (this.tradeItem.system.quantity.value - this.tradeData.quantity) as number;
             }
-            else {
-                await this.tradeItem.update({data: {
-                    // @ts-ignore - ItemWfrp4e has system, but not available
-                    quantity: this.tradeItem.system.quantity.value - this.tradeData.quantity
-                }});
-            }
+            await this.tradeItem.update({
+                system: {
+                    quantity: {
+                        value: itemValue
+                    }
+                }
+            });
         } else {
             console.error("Could not find item being traded on source");
         }
     }
 
     private async applyToDestination(): Promise<void> {
-        if (this.tradeItem) {
+        if (this.tradeItem && this.tradeData?.type === "money") {
+            let destItems: EmbeddedCollection<typeof Item, ActorData> = game.actors!.get(this.destActor!.id)!.items;
+            // @ts-ignore
+            let coinItem: Item = destItems.filter(c => c.name === this.tradeItem!.name)[0];
+            // @ts-ignore - system exists in ItemWfrp4e
+            // We are actually editing the existing item quantity since all sheets should have Gold/Silver/Brass
+            let itemValue: number = coinItem.system.quantity.value += this.tradeData.quantity;
+            await coinItem.update({
+                system: {
+                    quantity: {
+                        value: itemValue
+                    }
+                }
+            });
+        } else if (this.tradeData) {
             let itemData = duplicate(this.tradeItem);
             // @ts-ignore - ItemWfrp4e has system, but not available
             itemData.system.quantity.value = this.tradeData.quantity;
             this.destActor!.createEmbeddedDocuments("Item", [itemData]);
+
         } else {
             console.error("Could not find item being traded to destination");
         }
-
     }
 }
