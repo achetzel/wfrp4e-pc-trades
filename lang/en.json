@@ -19,5 +19,7 @@
   "PCTRADES.error.trade.noLongerValid": "Current trade is no longer valid",
   "PCTRADES.items.send": "Trade",
   "PCTRADES.error.init": "Error when initializing trade for item",
-  "PCTRADES.error.noOtherPCs": "No other PCs online"
+  "PCTRADES.error.noOtherPCs": "No other PCs online",
+  "PCTRADES.actor.directory.button": "Make Container",
+  "PCTRADES.notification.actor.created" : "{name} has been created"
 }

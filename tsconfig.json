@@ -7,6 +7,10 @@
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
         "strict": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "allowJs": true,
+        "paths": {
+            "core": ["/home/ac/foundry"]
+        }
     }
 }

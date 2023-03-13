@@ -1,4 +1,4 @@
-import {CFG} from "./config.js";
+import {CFG} from "../config";
 import {ICharData} from "./player";
 import Trade, {ITradeData} from "./trade";
 

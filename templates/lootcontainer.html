@@ -1,0 +1,88 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="header personal">
+        <a id="configure-actor">{{localize "Configure"}}</a>
+    </div>
+
+    <header class="sheet-header" ondragstart="return false;" ondrop="return false;">
+        <h1 class="charname item">
+            <input class="input name" style="box-shadow: none !important;" name="name" type="text" value="{{actor.name}}"
+                   placeholder={{localize "Name"}} />
+            <a class="label name name-gen">{{localize "Name"}}</a>
+        </h1>
+    </header>
+
+    <section class="general" ondragstart="return false;" ondrop="return false;">
+        <img class="charimg profile" src="{{actor.img}}" title="{{actor.name}}" height="95" width="95" data-edit="img">
+        <div class="items">
+            <div class="main-row">
+
+                <div class="attribute-box">
+                    <div class="attribute-section">
+                        <div class="attribute-name">
+                            <h4 class="attribute-label">{{localize "Toughness"}}</h4>
+                        </div>
+                        <div class="attribute-value">
+                            <input name="system.characteristics.t.initial" type="text" value="{{system.characteristics.t.initial}}" data-dtype="Number">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attribute-box">
+                    <div class="minmax-section">
+                        <span class="attribute-label">{{localize "Wounds"}}</span>
+                        <div class="minmax-box">
+                            <div class="current value">
+                                <input data-dtype="{{system.status.wounds.type}}" type="text" value="{{system.status.wounds.value}}" name="system.status.wounds.value">
+                            </div>
+                            <div class="divisor">
+                                /
+                            </div>
+                            <div class="max value">
+                                <input name="system.status.wounds.max" type="text" value="{{system.status.wounds.max}}" data-dtype="{{system.status.wounds.type}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attribute-box">
+                    <div class="attribute-section">
+                        <div class="attribute-name">
+                            <h4 class="attribute-label">{{localize "Carries"}}</h4>
+                        </div>
+                        <div class="attribute-value">
+                            <input type="text" name="system.status.carries.max" value="{{system.status.carries.max}}" data-dtype="Number"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="tab cargo save-scroll" data-tab="cargo" data-group="primary">
+            {{> systems/wfrp4e/templates/actors/vehicle/vehicle-cargo.hbs}}
+        </div>
+    </section>
+
+</form>
+
+<script>
+    textContainer = document.querySelectorAll('.vehicle-sheet .window-title');
+    length = textContainer.length;
+
+    for (i = 0; i < length; i++) {
+
+        if (textContainer[i].innerHTML.includes("[Token]")) {
+            new_red = document.getElementsByClassName("vehicle-sheet")[i].id;
+            if (!document.getElementById(new_red).className.includes("token-actor")) {
+                document.getElementById(new_red).className += " token-actor";
+            }
+            else {
+            }
+        }
+        else {
+        }
+    }
+
+
+</script>

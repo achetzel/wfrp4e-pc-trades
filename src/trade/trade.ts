@@ -1,4 +1,4 @@
-import {CFG} from "./config";
+import {CFG} from "../config";
 import Player, {ICharData} from "./player";
 import TradeWindow from "./tradeWindow"
 import TradeItem from "./items";
