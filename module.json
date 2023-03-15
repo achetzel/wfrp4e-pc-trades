@@ -28,7 +28,7 @@
   "license": "LICENSE",
   "socket": true,
   "styles": [
-    "css/main.css"
+    "css/style.css"
   ],
   "esmodules": [
     "pctrades.js"

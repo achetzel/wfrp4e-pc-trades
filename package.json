@@ -2,7 +2,7 @@
   "scripts": {
     "build": "yarn run js && yarn run less && cp -r module.json lang templates ./dist",
     "js": "esbuild src/pctrades.ts --bundle --outdir=dist",
-    "less": "lessc css/main.less dist/css/main.css",
+    "less": "lessc css/style.less dist/css/style.css",
     "deploy-local": "yarn run build && yarn run localcopy",
     "localcopy": "cp -r ./dist/* $LOCAL_MOD_INSTALL",
     "package": "rm -rf dist && yarn run build && cd dist && zip -mr wfrp4e-actor-maker.zip ./*"
