@@ -48,6 +48,15 @@ Hooks.once("setup", async function () {
 // @ts-ignore
 export class LootContainerSheet extends ActorSheetWfrp4e {
 
+    /**
+     * Get the correct HTML template path to use for rendering this particular sheet
+     * @type {String}
+     */
+    get template() {
+        if (!game.user!.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.hbs";
+        return "modules/wfrp4e-pc-trades/templates/lootcontainer.html";
+    }
+
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options,
@@ -59,14 +68,7 @@ export class LootContainerSheet extends ActorSheetWfrp4e {
         return options;
     }
 
-    /**
-     * Get the correct HTML template path to use for rendering this particular sheet
-     * @type {String}
-     */
-    get template() {
-        if (!game.user!.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.hbs";
-        return "modules/wfrp4e-pc-trades/templates/lootcontainer.html";
-    }
+
 
     async getData() {
         let sheetData = await super.getData();
@@ -115,7 +117,7 @@ export class LootContainerSheet extends ActorSheetWfrp4e {
         super.activateListeners(html);
 
         // Do not proceed if sheet is not editable
-        if (!this.options.editable) return;
+        //if (!this.options.editable) return;
 
         html.find(".cargo .inventory-list .name").mousedown(this._onCargoClick.bind(this));
     }
@@ -146,7 +148,7 @@ export class LootContainerSheet extends ActorSheetWfrp4e {
 
 // @ts-ignore - type is taken from extended object, will fit
 Actors.registerSheet("wfrp4e", LootContainerSheet, {
-    types: ["vehicle"],
+    types: ["npc"],
     makeDefault: false
 })
 

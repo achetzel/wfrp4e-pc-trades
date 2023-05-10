@@ -7,7 +7,7 @@ export default class Container {
     public static async buildData() {
         // vehicle is best choice atm for a random container w/ moveable items
         const name: string = "container";
-        const type: string = "vehicle";
+        const type: string = "npc";
 
         let data: ActorDataConstructorData = {
             name: name,

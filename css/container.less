@@ -1,82 +1,292 @@
-.app.window-app.sheet.pc-trades.loot-container .window-content {
-  font-size: var(--font-size-13);
-  overflow-y: hidden;
-  box-shadow: none;
-  background: none;
-  overflow-y: hidden;
-  border: 1px solid;
-  border-image: url(../ui/frames/actor-sheet-window-content.webp) 4 repeat;
-  border-image-slice: 106 fill;
-  border-image-width: 106;
-  border-image-outset: 63px 25px 11px 7px;
-  padding: 0px 0px 0px 0px;
-  margin: 3px 26px 0px 8px;
+.loot-container .gm-section {
+  /* height: 48px; */
+  color: #000;
+  /* font-weight: 700; */
+  font-size: 20px;
+  margin-top: 0.5rem;
+  text-align: center;
+  border-top: 1px solid #CCC;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 20px;
+  color: #4b4a44;
+  font-size: 18px;
 }
 
-.app.window-app.sheet.pc-trades.loot-container .window-content form {
-  margin: 44px 34px 0px 34px;
-  margin-bottom: 53px;
-  display: inline-block;
+.loot-container .gm-header {
+  margin-top: 0.5rem;
+}
+
+.loot-container .inventory-filters .item-controls {
+  flex: 0 0 20px;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: normal;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  padding: 0px;
-  border: 1px solid;
-  border-image: url(../ui/frames/actor-sheet-character-form.webp) 4 repeat;
-  border-image-slice: 250 fill;
-  border-image-width: 250;
-  border-image-outset: 44px 34px 0px 34px;
-  /* background: red; */
-  /* box-shadow: var(--debug-box-shadow-red); */
+  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
-.app.window-app.pc-trades.loot-container select,
-.app.window-app.sheet.item-sheet .tab .form-group > select {
-  width: inherit;
-  background: none;
-  border: 1px solid #736953a6;
-  border-left: none;
-  border-radius: 0px;
-  padding: 0px;
-  padding-top: 4px;
-  font-family: CaslonPro;
-  font-size: var(--font-size-14);
-  font-weight: 500;
-  color: black;
-  height: 25px;
-  text-align-last: center;
-  box-shadow: none;
+.loot-container .inventory-filters .item-controls a, .loot-container.sheet .items-list .item-controls a {
+  flex: 0 0 22px;
+  font-size: 12px;
+  text-align: center;
+  color: #7a7971;
 }
-.app.window-app.pc-trades.loot-container .inventory-list .role-actor {
-  padding-top: 5px
+
+.loot-container .gm-settings .permissions-list,
+.loot-container .gm-settings .coin-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.app.window-app.pc-trades.loot-container .role-name,
-.app.window-app.pc-trades.loot-container .role-skill,
-.app.window-app.pc-trades.loot-container .role-actor {
+
+.loot-container .gm-settings .sheet-types,
+.loot-container .gm-settings .merchant-settings {
+  margin-right: 10px;
+}
+
+.loot-container .gm-settings .merchant-settings .flexrow {
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 5px;
+}
+
+.loot-container .gm-settings .merchant-settings .flexrow {
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 5px;
+}
+
+.loot-container input[type="text"], .loot-container input[type="number"], .loot-container select {
+  height: calc(100% - 2px);
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+  color: #000000;
+  text-overflow: ellipsis;
+}
+
+.loot-container select.sheet-rolltable {
+  max-width: 125px;
+}
+
+.loot-container .gm-settings .merchant-settings .flexrow h4 {
+  margin: 2px 0 0 0;
+}
+
+.loot-container .gm-settings .merchant-settings {
+  margin-left: 24px;
+}
+
+.loot-container .gm-settings .coins-list {
+  padding-left: 24px;
+}
+
+.loot-container .gm-settings h4.sheet-name {
   flex: 1;
-  text-align: center
+  margin: 0 0 0 24px;
+  line-height: 22px;
 }
 
-.app.window-app.pc-trades.loot-container .inventory-list .role-skill {
-  line-height: 30px;
+.loot-container .gm-settings .permission,
+.loot-container .gm-settings .denomination {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  height: 21px;
+  line-height: 21px;
+  border-bottom: 1px solid #CCC;
+  font-size: 13px;
 }
 
-.app.window-app.pc-trades.loot-container .mod-type,
-.app.window-app.pc-trades.loot-container .mod-enc {
+.loot-container .gm-settings .sheet-type-info,
+.loot-container .gm-settings .permission-info,
+.loot-container .gm-settings .merchant-settings-info,
+.itemsonce-info  {
+  color: #7a7971;
+  margin: 6px 6px 6px 24px;
+  display: none;
+}
+
+.loot-container .gm-settings .help {
+  color: #7a7971;
+  font-size: 13px;
+}
+
+.loot-container .gm-settings .permission,
+.loot-container .gm-settings .denomination>* {
   flex: 1;
-  text-align: center
+  flex-wrap: inherit;
+  height: auto;
 }
 
-.app.window-app.pc-trades.loot-container .inventory-list .mod-type,
-.app.window-app.pc-trades.loot-container .inventory-list .mod-enc {
-  line-height: 30px;
-  padding-top: 4px;
+.loot-container .gm-settings .permission .permission-name {
+  margin: 0;
 }
 
+.loot-container .gm-settings .permission .permission-proficiency {
+  text-align: center;
+  flex: 0 0 24px;
+}
 
-.app.window-app.pc-trades.loot-container select{
-  width: 100%;
+.loot-container .gm-settings .permission .permission-proficiency i.fa-circle {
+  font-size: 10px;
+}
+
+.loot-container .gm-settings .split-coins {
+  width: 95%;
+}
+
+.loot-container.sheet .window-content form {
+  overflow-y: auto !important;
+}
+
+img.sheet-profile {
   border: none;
+  max-width: 220px;
+  max-height: 220px;
+}
+
+.loot-container.sheet.actor .inventory-filters .currency span {
+  flex: 0 0 105px;
+  white-space: nowrap;
+}
+
+.loot-container.sheet.actor .inventory-filters .currency input[type="text"] {
+  width: 40px;
+}
+
+.currency.inventory span span {
+  width: 40px;
+  text-align: center;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+.loot-container.sheet.actor .inventory-filters .currency label {
+  white-space: nowrap;
+  padding-bottom: 0;
+}
+
+.loot-container.sheet.actor .inventory-filters .currency input {
+  vertical-align: bottom;
+}
+
+.loot-container .inventory-filters .item-controls a.currency-loot {
+  display: inline-block;
+  padding-top: 4px;
+}
+
+.loot-container.sheet.actor label.denomination {
+  display: inline-block;
+  padding-left: 24px;
+  padding-bottom: 10px;
+  vertical-align: super;
+}
+
+.loot-container.sheet.actor label.denomination.gp {
+  background: url(../images/gp.png) no-repeat;
+  background-size: auto 20px;
+}
+
+.loot-container.sheet.actor label.denomination.pp {
+  background: url(../images/pp.png) no-repeat;
+  background-size: auto 20px;
+}
+
+.loot-container.sheet.actor label.denomination.ep {
+  background: url(../images/ep.png) no-repeat;
+  background-size: auto 20px;
+}
+
+.loot-container.sheet.actor label.denomination.sp {
+  background: url(../images/sp.png) no-repeat;
+  background-size: auto 20px;
+}
+
+.loot-container.sheet.actor label.denomination.cp {
+  background: url(../images/cp.png) no-repeat;
+  background-size: auto 20px;
+}
+
+section.sheet-sidebar.sidebar {
+  flex: 0 0 250px;
+  border-right: 2px groove #eeede0;
+}
+
+.sheet-profile-img {
+  text-align: center;
+}
+
+.loot-container.sheet.actor .editor {
+  height: 300px;
+}
+
+.loot-container.sheet.actor .inventory-list .item .item-price,
+.loot-container.sheet.actor .inventory-list .item .item-quantity,
+.loot-container.sheet.actor .inventory-list .item .item-weight {
+  flex: 0 0 75px;
+  color: #666;
+  font-size: 10px;
+}
+
+.loot-container.sheet.actor .inventory-list .item .item-controls {
+  flex: 0 0 100px !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  justify-content: flex-end;
+}
+
+.loot-container.sheet .sheet-header .charbutton {
+  flex: 0 0 200px;
+  margin: auto;
+  text-align: right;
+}
+
+button.price-modifier {
+  width: auto;
+  padding: 1px 10px;
+  margin-right: 5px;
+}
+
+.loot-container.sheet .sheet-navigation {
+  margin-bottom: 15px;
+}
+
+input#price-modifier-percent-display {
+  background: none;
+  border: 1px solid transparent;
+  width: 50px;
+}
+
+input#price-modifier-percent-display:hover,
+input#price-modifier-percent-display:focus,
+input#quantity:hover,
+input#quantity:focus {
+  border: 1px solid #111;
+  box-shadow: 0 0 8px red;
+}
+
+.loot-container .sheet-profile-img {
+  padding: 10px;
+}
+
+.loot-container.sheet .sheet-header h1 input {
+  margin: 0px;
+}
+
+.loot-container.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
+  flex: initial;
+}
+
+.loot-container li.item.flexrow.inventory-header {
+  padding: 8px 8px 0 0;
+}
+
+.loot-container .currency input[type="number"] {
+  max-width: 3rem;
+}
+
+.loot-container.sheet.actor .item-buyall,
+.loot-container.sheet.actor .item-lootall {
+  display: none !important;
 }
