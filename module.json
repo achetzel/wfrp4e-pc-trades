@@ -3,7 +3,15 @@
   "description": "A Foundry VTT module which allows you to send and receive items from other players.",
   "version": "1.0.0",
   "id": "wfrp4e-pc-trades",
-  "author": "achetzel",
+  "authors": [
+    {
+      "name": "achetzel",
+      "discord": "tylwyn",
+	  "flags": {
+		  "github": "achetzel"
+		  }
+    }
+  ],
   "languages": [
     {
       "lang": "en",
